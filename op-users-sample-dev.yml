@@ -1,7 +1,7 @@
 
 spring:
   application:
-    name:
+    name: op-users-sample
     instance_id: dev
 
 server:
