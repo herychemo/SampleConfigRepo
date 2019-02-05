@@ -13,7 +13,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: heapdump,liquibase,loggers,prometheus,threaddump,info,metrics,health
+        include: heapdump,liquibase,loggers,prometheus,threaddump,info,metrics,health,hystrix.stream
 
 ## Eureka client properties ##
 eureka:
