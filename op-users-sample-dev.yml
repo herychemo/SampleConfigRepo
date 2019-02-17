@@ -1,13 +1,13 @@
 
 spring:
   application:
-    name: op-users-sample
+    name: users-ms-sample
     instance_id: dev
 
 server:
   port: 9871
   servlet:
-    context-path: /op-users-sample
+    context-path: /users-ms-sample
 
 management:
   endpoints:
