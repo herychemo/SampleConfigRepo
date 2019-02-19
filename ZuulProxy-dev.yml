@@ -1,0 +1,26 @@
+
+info:
+  component: Zuul Proxy App
+
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: ZuulProxy
+  config:
+    name: ZuulProxy
+
+
+zuul:
+  routes:
+    microservices-users-ms-sample:
+      path: /users-ms-sample/**
+      serviceId: users-ms-sample
+      stripPrefix: false
+
+
+
+error:
+  whitelabel:
+    enabled: false
