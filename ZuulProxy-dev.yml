@@ -18,6 +18,10 @@ zuul:
       path: /users-ms-sample/**
       serviceId: users-ms-sample
       stripPrefix: false
+    microservices-oauth2-ms-sample:
+      path: /oauth2-ms-sample/**
+      serviceId: oauth2-ms-sample
+      stripPrefix: false
 
 
 
