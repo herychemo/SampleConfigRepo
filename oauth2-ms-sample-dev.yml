@@ -32,8 +32,8 @@ spring:
   datasource:
     postgres:
       driver-class-name: org.postgresql.Driver
-      jdbc-url: jdbc:postgresql://localhost:5432/postgres
-      username: postgres
+      jdbc-url: jdbc:postgresql://localhost:5432/cloud_db?currentSchema=oauth2
+      username: dbo_admin
       password: rootroot
 
       initial-size: 1
