@@ -22,6 +22,8 @@ zuul:
       path: /oauth2-ms-sample/**
       serviceId: oauth2-ms-sample
       stripPrefix: false
+      # Remove Authorization from sensitiveHeaders
+      sensitiveHeaders: Cookie,Set-Cookie
 
 
 
