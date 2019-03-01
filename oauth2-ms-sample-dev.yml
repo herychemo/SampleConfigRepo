@@ -17,6 +17,7 @@ spring:
     serialization:
       FAIL_ON_EMPTY_BEANS: false
   
+  
   jpa:
     database: default
     hibernate:
@@ -28,6 +29,9 @@ spring:
           lob:
             non_contextual_creation: true
   
+  
+  flyway:
+    schemas: oauth2
   
   datasource:
     postgres:
