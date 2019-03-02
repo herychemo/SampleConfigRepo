@@ -2,7 +2,7 @@
 
 spring:
   application:
-    name: oauth2-ms-sample
+    name: auth-ms
     instance_id: dev
   
   # Logging    
@@ -31,12 +31,12 @@ spring:
   
   
   flyway:
-    schemas: oauth2
+    schemas: auth
   
   datasource:
     postgres:
       driver-class-name: org.postgresql.Driver
-      jdbc-url: jdbc:postgresql://localhost:5432/cloud_db?currentSchema=oauth2
+      jdbc-url: jdbc:postgresql://localhost:5432/cloud_db?currentSchema=auth
       username: dbo_admin
       password: rootroot
 
@@ -57,13 +57,14 @@ spring:
 server:
   port: ${SERVER_PORT:9869}
   servlet:
-    context-path: /oauth2-ms-sample
+    context-path: /auth-ms
 
 management:
   endpoints:
     web:
       exposure:
-        include: heapdump,liquibase,loggers,prometheus,threaddump,info,metrics,health,hystrix.stream
+        include: '*'
+      base-path: /actuator
 
 security:
   signing-key: xja6jeEyKKX5HpJ #https://www.random.org/strings/
