@@ -14,13 +14,13 @@ spring:
 
 zuul:
   routes:
-    microservices-users-ms-sample:
-      path: /users-ms-sample/**
-      serviceId: users-ms-sample
+    microservices-accounts-ms:
+      path: /accounts-ms/**
+      serviceId: accounts-ms
       stripPrefix: false
-    microservices-oauth2-ms-sample:
-      path: /oauth2-ms-sample/**
-      serviceId: oauth2-ms-sample
+    microservices-auth-ms:
+      path: /auth-ms/**
+      serviceId: auth-ms
       stripPrefix: false
       # Remove Authorization from sensitiveHeaders
       sensitiveHeaders: Cookie,Set-Cookie
