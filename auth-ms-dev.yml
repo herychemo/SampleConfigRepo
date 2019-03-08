@@ -29,7 +29,7 @@ spring:
           lob:
             non_contextual_creation: true
   
-  
+  # Configure flyway schemas for microservice
   flyway:
     schemas: auth
   
