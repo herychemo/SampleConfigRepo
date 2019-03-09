@@ -65,6 +65,10 @@ management:
       exposure:
         include: '*'
       base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
+
 
 security:
   signing-key: xja6jeEyKKX5HpJ #https://www.random.org/strings/
@@ -80,7 +84,7 @@ eureka:
     metadataMap:
       instanceId: ${spring.application.name}:${spring.application.instance_id:${random.int}}
       management:
-        context-path: ${server.servlet.context-path}
+        context-path: ${server.servlet.context-path}/actuator
         port: ${server.port}
     #nonSecurePort: 8088
     statusPageUrlPath: ${server.servlet.context-path}/actuator/info

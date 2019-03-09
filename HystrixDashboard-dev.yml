@@ -30,6 +30,15 @@ turbine:
 
 
 eureka:
+  instance:
+    metadataMap:
+      instanceId: ${spring.application.name}:${spring.application.instance_id:${random.int}}
+      management:
+        context-path: ${server.servlet.context-path}/actuator
+        port: ${server.port}
+    #nonSecurePort: 8088
+    statusPageUrlPath: ${server.servlet.context-path}/actuator/info
+    healthCheckUrlPath: ${server.servlet.context-path}/actuator/health
   client:
     serviceUrl:
       defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}

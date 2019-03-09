@@ -29,6 +29,9 @@ management:
       exposure:
         include: '*'
       base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
  
 
 ## Eureka client properties ##
