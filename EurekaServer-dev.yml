@@ -1,4 +1,7 @@
 
+info:
+  component: Eureka Server
+
 server:
   port:
     8761

@@ -1,4 +1,7 @@
 
+info:
+  component: Auth Ms
+
 
 spring:
   application:

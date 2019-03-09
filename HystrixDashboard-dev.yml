@@ -1,4 +1,7 @@
 
+info:
+  component: Hystrix Dashboard
+
 server:
   port: ${SERVER_PORT:9002}
   servlet:

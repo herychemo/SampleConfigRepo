@@ -1,4 +1,7 @@
 
+info:
+  component: Accounts Ms
+
 spring:
   application:
     name: accounts-ms

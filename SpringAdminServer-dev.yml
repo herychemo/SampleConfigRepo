@@ -1,4 +1,7 @@
 
+info:
+  component: Spring Admin Server
+
 server:
   port: ${SERVER_PORT:8760}
 
