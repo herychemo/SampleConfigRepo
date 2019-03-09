@@ -37,7 +37,7 @@ eureka:
     metadataMap:
       instanceId: ${spring.application.name}:${spring.application.instance_id:${random.int}}
       management:
-        context-path: ${server.servlet.context-path}
+        context-path: ${server.servlet.context-path}/actuator
         port: ${server.port}
     #nonSecurePort: 8088
     statusPageUrlPath: ${server.servlet.context-path}/actuator/info
