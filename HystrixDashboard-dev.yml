@@ -32,8 +32,11 @@ turbine:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
     instance:
       metadataMap:
         instanceId: ${spring.application.name}:${server.port}
-    registerWithEureka: false
+    registerWithEureka: true
+    healthcheck:
+      enabled: true
+    fetchRegistry: false

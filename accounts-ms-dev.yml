@@ -7,7 +7,7 @@ spring:
   # Logging    
   sleuth:
     sampler:
-      probability: 0.6  # 60.0% Sampling
+      probability: 0.2  # 20.0% Sampling
   zipkin:
     enabled: ${ZIPKIN_ENABLED:true}
     base-url: ${ZIPKIN_SERVER:http://localhost:9411/}
