@@ -1,6 +1,8 @@
 
 server:
   port: ${SERVER_PORT:9002}
+  servlet:
+    context-path: /
 
 spring:
   application:
