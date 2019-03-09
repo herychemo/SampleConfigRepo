@@ -15,7 +15,11 @@ spring:
   zipkin:
     enabled: ${ZIPKIN_ENABLED:true}
     base-url: ${ZIPKIN_SERVER:http://localhost:9411/}
-  
+
+  logging:
+    logstash:
+      host-port: localhost:5000
+
   jackson:
     serialization:
       FAIL_ON_EMPTY_BEANS: false
