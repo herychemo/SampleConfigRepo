@@ -45,6 +45,11 @@ zuul:
       stripPrefix: false
       # Remove Authorization from sensitiveHeaders
       sensitiveHeaders: Cookie,Set-Cookie
+    spring-admin-server:
+      path: /admin/**
+      serviceId: Spring-Admin-Server
+      stripPrefix: true
+      sensitiveHEaders:
 
 
 eureka:
