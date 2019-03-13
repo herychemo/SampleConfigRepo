@@ -11,6 +11,14 @@ spring:
   config:
     name: SpringAdminServer
 
+
+  #Don't ignore headers, oauth2 secured endpoints require Authorization and Cookies to work
+  boot:
+    admin:
+      instance-proxy:
+        ignored-headers:
+
+
   security:
     oauth2:
       client:
