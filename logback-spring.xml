@@ -22,7 +22,7 @@
     </appender>
 
     <appender name="TCP_LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>${spring.logging.logstash.tcp-url}</destination>
+        <destination>${spring.logging.logstash.url}</destination>
         <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
             <providers>
                 <timestamp>
