@@ -7,7 +7,8 @@ spring:
   application:
     name: auth-ms
     instance_id: dev
-  
+
+
   # Logging    
   sleuth:
     sampler:
@@ -18,7 +19,17 @@ spring:
 
   logging:
     logstash:
-      host-port: localhost:5000
+      url: ${LOGSTASH_URL:localhost}
+      tcp-port: ${LOGSTASH_TCP_PORT:5000}
+      tcp-input: ${logging.logstash.url}:${logging.logstash.tcp-port}
+
+
+  rabbitmq:
+    host: ${RABBIT_MQ_URL:localhost}
+    port: ${RABBIT_MQ_PORT:5672}
+    username: ${RABBIT_MQ_USERNAME:guest}
+    password: ${RABBIT_MQ_PASSWORD:guest}
+
 
   jackson:
     serialization:
@@ -114,3 +125,4 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 3000
+
