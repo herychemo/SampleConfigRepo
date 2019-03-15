@@ -31,7 +31,7 @@ spring:
             authorization-grant-type: authorization_code
             scope: read
             redirect-uri-template: '{baseUrl}/login/oauth2/code/{registrationId}'
-            client-name: Login Client
+            client-name: Auth-Ms Login Client
         provider:
           custom-provider:
             authorization-uri: http://localhost:8080/auth-ms/oauth/authorize
