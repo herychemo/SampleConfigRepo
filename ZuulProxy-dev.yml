@@ -39,6 +39,7 @@ zuul:
       path: /accounts-ms/**
       serviceId: accounts-ms
       stripPrefix: false
+      sensitiveHeaders: Cookie,Set-Cookie
     microservices-auth-ms:
       path: /auth-ms/**
       serviceId: auth-ms
