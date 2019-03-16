@@ -9,7 +9,7 @@ server:
 
 spring:
   application:
-    name: HystrixDashboard
+    name: Hystrix-Dashboard
   config:
     name: HystrixDashboard
 
