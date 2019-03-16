@@ -90,9 +90,9 @@ management:
 
 security:
   signing-key: xja6jeEyKKX5HpJ #https://www.random.org/strings/
-  security-realm: Sample Default Realm
+  security-realm: Spring Cloud Sample Stack
   jwt:
-    users-resource-id: usersjwtresourceid
+    local-resource-id: auth-ms-resource-id
 
 
 
@@ -125,4 +125,3 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 3000
-
