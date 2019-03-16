@@ -35,6 +35,17 @@ spring:
     password: ${RABBIT_MQ_PASSWORD:guest}
 
 
+security:
+  oauth2:
+    client:
+      grant-type: authorization_code
+      accessTokenUri: http://localhost:8080/auth-ms/oauth/token
+      userAuthorizationUri: http://localhost:8080/auth-ms/oauth/authorize
+      clientId: default_oauth2_client_id
+      clientSecret: QWERTY74gray75raccoon634
+    resource:
+      userInfoUri: http://localhost:8080/auth-ms/ws/authenticated/user
+
 
 management:
   endpoints:
