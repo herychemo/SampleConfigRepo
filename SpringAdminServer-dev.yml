@@ -17,7 +17,8 @@ spring:
     admin:
       instance-proxy:
         ignored-headers:
-
+      ui:
+        public-url: http://localhost:8080/admin/
 
   security:
     oauth2:
