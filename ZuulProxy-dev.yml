@@ -9,7 +9,7 @@ server:
 
 spring:
   application:
-    name: Zuul-Proxy
+    name: zuul-proxy
   config:
     name: ZuulProxy
 

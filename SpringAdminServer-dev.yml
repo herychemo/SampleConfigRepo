@@ -7,7 +7,7 @@ server:
 
 spring:
   application:
-    name: Spring-Admin-Server
+    name: spring-admin-server
   config:
     name: SpringAdminServer
 
