@@ -51,7 +51,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: info,health,hystrix.stream
       base-path: /actuator
   endpoint:
     health:
