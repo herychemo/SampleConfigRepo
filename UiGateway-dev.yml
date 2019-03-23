@@ -75,6 +75,7 @@ spring.cloud.gateway:
         - Path=/admin/**
       filters:
         - StripPrefix=1
+        - TokenRelay=
       uri: lb://Spring-Admin-Server/
 
 
