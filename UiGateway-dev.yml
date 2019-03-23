@@ -79,9 +79,15 @@ spring.cloud.gateway:
       uri: lb://Spring-Admin-Server/
 
     - predicates:
-        - Path=/hystrix/**
+        - Path=/hystrix
       filters:
         - StripPrefix=1
+        - TokenRelay=
+      uri: lb://Hystrix-Dashboard/hystrix
+    - predicates:
+        - Path=/hystrix/**
+      filters:
+        - StripPrefix=0
         - TokenRelay=
       uri: lb://Hystrix-Dashboard/
 
