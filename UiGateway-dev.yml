@@ -94,11 +94,13 @@ spring.cloud.gateway:
 
     - predicates:
         - Path=/turbine.stream**
+        - RemoteAddr=192.168.0.0/24
       filters:
         - StripPrefix=0
         - TokenRelay=
         #- RewritePath=/(?<turbine>.*), /tb/$\{turbine}
       uri: lb://turbine-server/
+
 
 
 management:
