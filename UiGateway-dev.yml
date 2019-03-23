@@ -54,7 +54,7 @@ spring.security.oauth2.client:
       user-name-attribute: username
 
 
-
+# https://aboullaite.me/spring-cloud-gateway/
 spring.cloud.gateway:
   enabled: true
   routes:
@@ -78,12 +78,34 @@ spring.cloud.gateway:
         - TokenRelay=
       uri: lb://Spring-Admin-Server/
 
+    - predicates:
+        - Path=/hy/**
+      filters:
+        - StripPrefix=0
+        - TokenRelay=
+      uri: lb://Hystrix-Dashboard/
+
+    - predicates:
+        - Path=/tb/**
+      filters:
+        - StripPrefix=1
+        - TokenRelay=
+      uri: lb://turbine-server/
+
+    - predicates:
+        - Path=/turbine.stream**
+      filters:
+        - StripPrefix=0
+        - TokenRelay=
+        #- RewritePath=/(?<turbine>.*), /tb/$\{turbine}
+      uri: lb://turbine-server/
+
 
 management:
   endpoints:
     web:
       exposure:
-        include: info,health,hystrix.stream
+        include: info,health
       base-path: /actuator
   endpoint:
     health:
