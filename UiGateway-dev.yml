@@ -56,6 +56,7 @@ spring.security.oauth2.client:
       user-name-attribute: username
 
 
+# https://cloud.spring.io/spring-cloud-gateway/single/spring-cloud-gateway.html
 # https://aboullaite.me/spring-cloud-gateway/
 spring.cloud.gateway:
   enabled: true
@@ -114,7 +115,6 @@ management:
   endpoint:
     health:
       show-details: always
-
 
 
 eureka:
