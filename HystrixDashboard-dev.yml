@@ -15,15 +15,13 @@ spring:
 
 
 security:
-  oauth2:
-    client:
-      grant-type: authorization_code
-      accessTokenUri: http://localhost:8081/auth-ms/oauth/token
-      userAuthorizationUri: http://localhost:8081/auth-ms/oauth/authorize
-      clientId: default_oauth2_client_id
-      clientSecret: QWERTY74gray75raccoon634
-    resource:
-      userInfoUri: http://localhost:8081/auth-ms/ws/authenticated/user
+  token-services:
+    client-id: default_oauth2_client_id
+    client-secret: QWERTY74gray75raccoon634
+    check-token-url: http://localhost:8081/auth-ms/oauth/check_token
+  jwt:
+    local-resource-id: hystrix-dashboard-resource-id
+
 
 
 management:
