@@ -5,7 +5,7 @@ info:
 server:
   port: ${SERVER_PORT:9002}
   servlet:
-    context-path: /
+    context-path: /hy
 
 spring:
   application:
@@ -35,16 +35,6 @@ management:
       show-details: always
 
 
-turbine:
-  aggregator:
-    clusterConfig: ACCOUNTS-MS,AUTH-MS
-  app-config: accounts-ms,auth-ms
-  instanceUrlSuffix:
-    ACCOUNTS-MS: /accounts-ms/actuator/hystrix.stream
-    AUTH-MS: /auth-ms/actuator/hystrix.stream
-  combine-host-port: true
-
-
 eureka:
   instance:
     metadataMap:
@@ -64,4 +54,5 @@ eureka:
     registerWithEureka: true
     healthcheck:
       enabled: true
-    fetchRegistry: true
+    fetchRegistry: false
+
