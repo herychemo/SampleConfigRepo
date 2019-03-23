@@ -15,6 +15,8 @@ spring:
   #Don't ignore headers, oauth2 secured endpoints require Authorization and Cookies to work
   boot:
     admin:
+      ui:
+        public-url: http://localhost:8082/admin/
       instance-proxy:
         ignored-headers:
 
@@ -27,8 +29,13 @@ security:
       userAuthorizationUri: http://localhost:8081/auth-ms/oauth/authorize
       clientId: default_oauth2_client_id
       clientSecret: QWERTY74gray75raccoon634
+
+      use-current-uri: false
+      registered-redirect-uri: http://localhost:8760/login
+      pre-established-redirect-uri: http://localhost:8760/login
     resource:
       userInfoUri: http://localhost:8081/auth-ms/ws/authenticated/user
+
 
 
 
