@@ -63,13 +63,13 @@ spring.cloud.gateway:
       filters:
         - StripPrefix=1
       uri: http://localhost:8761/
-
     - predicates:
         - Path=/eureka/**
       filters:
         - StripPrefix=0
         #- RewritePath=/eureka/(?<segment>.*), /bar/$\{segment}
       uri: http://localhost:8761/
+
 
     - predicates:
         - Path=/admin/**
@@ -78,6 +78,12 @@ spring.cloud.gateway:
         - TokenRelay=
       uri: lb://Spring-Admin-Server/
 
+    - predicates:
+        - Path=/hystrix/**
+      filters:
+        - StripPrefix=1
+        - TokenRelay=
+      uri: lb://Hystrix-Dashboard/
 
 
 management:
