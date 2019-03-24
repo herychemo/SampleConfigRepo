@@ -33,6 +33,16 @@ spring:
     password: ${RABBIT_MQ_PASSWORD:guest}
 
 
+  # Spring cloud stream channels
+  cloud.stream.bindings:
+    consumerUserCreatedMessageChannel:
+      destination: users.events.created
+    consumerUserUpdatedMessageChannel:
+      destination: users.events.updated
+    consumerUserDeletedMessageChannel:
+      destination: users.events.deleted
+
+
   jackson:
     serialization:
       FAIL_ON_EMPTY_BEANS: false
