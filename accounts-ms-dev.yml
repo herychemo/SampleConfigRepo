@@ -67,24 +67,37 @@ spring:
 
   datasource:
     postgres:
+      # Connection Properties
       driver-class-name: org.postgresql.Driver
       jdbc-url: jdbc:postgresql://localhost:5432/cloud_db?currentSchema=accounts
       username: dbo_admin
       password: rootroot
 
+      # Pool Properties
       initial-size: 1
       max-active: 10
-      max-idle: 10
-      test-on-borrow: true
-      validation-query: SELECT 1
-      time-between-eviction-runs-millis: 30000
-      max-wait: 10000
-      min-evictable-idle-time-millis: 30000
-      log-abandoned: true
-      test-while-idle: true
-      validation-interval: 300000
-      jdbc-interceptors: org.apache.tomcat.jdbc.pool.interceptor.SlowQueryReport(threshold=10000)
+      min-idle: 1
+      max-idle: 5
 
+      # Connection test properties
+      validation-query: SELECT 1
+      test-on-borrow: true
+      test-while-idle: true
+
+      #Connection test timing and intervals properties
+      time-between-eviction-runs-millis: 30000
+      min-evictable-idle-time-millis: 30000
+      validation-interval: 30000
+      max-wait: 10000
+
+      # Abandoned or dead connections handling properties
+      test-on-return: true
+      remove-abandoned: true
+      remove-abandoned-timeout: 50
+      log-abandoned: true
+
+      # Interceptors
+      jdbc-interceptors: org.apache.tomcat.jdbc.pool.interceptor.SlowQueryReport(threshold=10000)
 
 
 server:
