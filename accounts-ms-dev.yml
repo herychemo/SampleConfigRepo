@@ -64,6 +64,7 @@ spring:
   # Configure flyway schemas for microservice
   flyway:
     schemas: accounts
+    locations: classpath:db/migration,classpath:db/data
 
   datasource:
     postgres:
