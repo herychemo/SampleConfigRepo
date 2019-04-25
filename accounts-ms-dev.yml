@@ -145,11 +145,25 @@ eureka:
     registerWithEureka: true
     healthcheck:
       enabled: true
-    fetchRegistry: false
+    #Enable fetch Eureka registry in order to use Ribbon LB
+    fetchRegistry: true
+
+
+## Feign Clients
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: full
+        requestInterceptors:
+          - com.grayraccoon.sample.accountsms.config.interceptors.Oauth2TokenInterceptor
 
 
 ##Hystrix##
 hystrix:
+  shareSecurityContext: true
   command:
     default:
       execution:
