@@ -138,6 +138,8 @@ eureka:
     #nonSecurePort: 8088
     statusPageUrlPath: ${server.servlet.context-path}/actuator/info
     healthCheckUrlPath: ${server.servlet.context-path}/actuator/health
+    leaseRenewalIntervalInSeconds: 5
+    lease-expiration-duration-in-seconds: 5
   client:
     enabled: true
     serviceUrl:
@@ -147,6 +149,7 @@ eureka:
       enabled: true
     #Enable fetch Eureka registry in order to use Ribbon LB
     fetchRegistry: true
+    registryFetchIntervalSeconds: 5
 
 
 ## Feign Clients

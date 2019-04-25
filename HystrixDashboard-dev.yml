@@ -45,6 +45,8 @@ eureka:
     #nonSecurePort: 8088
     statusPageUrlPath: ${server.servlet.context-path}/actuator/info
     healthCheckUrlPath: ${server.servlet.context-path}/actuator/health
+    leaseRenewalIntervalInSeconds: 5
+    lease-expiration-duration-in-seconds: 5
   client:
     enabled: true
     serviceUrl:
@@ -56,4 +58,5 @@ eureka:
     healthcheck:
       enabled: true
     fetchRegistry: false
+    registryFetchIntervalSeconds: 5
 

@@ -52,3 +52,4 @@ eureka:
     healthcheck:
       enabled: true
     fetchRegistry: true
+    registryFetchIntervalSeconds: 5
