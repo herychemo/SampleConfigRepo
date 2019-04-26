@@ -3,7 +3,7 @@
 # Instance Id
 spring:
   application:
-    instance_id: dev
+    instance_id: local
 
 
   # Logging
