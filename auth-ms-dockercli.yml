@@ -1,0 +1,51 @@
+
+
+# Instance Id
+spring:
+  application:
+    instance_id: dockercli
+
+
+  # Logging
+  zipkin:
+    enabled: true
+    base-url: http://ZipkinServer:9411/
+  logging:
+    logstash:
+      url: logstashserver
+      tcp-port: 5000
+      tcp-input: ${logging.logstash.url}:${logging.logstash.tcp-port}
+
+
+  # RabbitMQ
+  rabbitmq:
+    host: RabbitMQ-Server
+    port: 5672
+    username: guest
+    password: guest
+
+
+  # Configure Database DataSources
+  datasource:
+
+    # Postgres DataSource
+    postgres:
+      # Connection Properties
+      driver-class-name: org.postgresql.Driver
+      jdbc-url: jdbc:postgresql://PostgresDatabase:5432/cloud_db?currentSchema=auth
+      username: dbo_admin
+      password: rootroot
+
+
+# Server Properties
+server:
+  port: 9869
+  servlet:
+    context-path: /auth-ms
+
+
+# Eureka client properties
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://EurekaServer:8761/eureka
