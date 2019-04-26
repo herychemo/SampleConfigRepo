@@ -1,72 +1,34 @@
 
-info:
-  component: Accounts Ms
 
-
+# Instance Id
 spring:
   application:
-    name: accounts-ms
     instance_id: dev
 
 
-  # Logging    
-  sleuth:
-    sampler:
-      probability: 0.2  # 20.0% Sampling
+  # Logging
   zipkin:
-    sender:
-      type: web
-    enabled: ${ZIPKIN_ENABLED:true}
-    base-url: ${ZIPKIN_SERVER:http://localhost:9411/}
-
+    enabled: true
+    base-url: http://localhost:9411/
   logging:
     logstash:
-      url: ${LOGSTASH_URL:localhost}
-      tcp-port: ${LOGSTASH_TCP_PORT:5000}
+      url: localhost
+      tcp-port: 5000
       tcp-input: ${logging.logstash.url}:${logging.logstash.tcp-port}
 
 
+  # RabbitMQ
   rabbitmq:
-    host: ${RABBIT_MQ_URL:localhost}
-    port: ${RABBIT_MQ_PORT:5672}
-    username: ${RABBIT_MQ_USERNAME:guest}
-    password: ${RABBIT_MQ_PASSWORD:guest}
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 
-  # Spring cloud stream channels
-  cloud.stream.bindings:
-    producerUserCreatedMessageChannel:
-      destination: users.events.created
-      group: users.events.created.accounts.consumer
-    producerUserUpdatedMessageChannel:
-      destination: users.events.updated
-      group: users.events.updated.accounts.consumer
-    producerUserDeletedMessageChannel:
-      destination: users.events.deleted
-      group: users.events.deleted.accounts.consumer
-
-
-  jackson:
-    serialization:
-      FAIL_ON_EMPTY_BEANS: false
-
-  jpa:
-    database: default
-    hibernate:
-      ddl-auto: validate
-
-    properties:
-      hibernate:
-        jdbc:
-          lob:
-            non_contextual_creation: true
-
-  # Configure flyway schemas for microservice
-  flyway:
-    schemas: accounts
-    locations: classpath:db/migration,classpath:db/data
-
+  # Configure Database DataSources
   datasource:
+
+    # Postgres DataSource
     postgres:
       # Connection Properties
       driver-class-name: org.postgresql.Driver
@@ -74,102 +36,26 @@ spring:
       username: dbo_admin
       password: rootroot
 
-      # Pool Properties
-      initial-size: 1
-      max-active: 10
-      min-idle: 1
-      max-idle: 5
-
-      # Connection test properties
-      validation-query: SELECT 1
-      test-on-borrow: true
-      test-while-idle: true
-
-      #Connection test timing and intervals properties
-      time-between-eviction-runs-millis: 30000
-      min-evictable-idle-time-millis: 30000
-      validation-interval: 30000
-      max-wait: 10000
-
-      # Abandoned or dead connections handling properties
-      test-on-return: true
-      remove-abandoned: true
-      remove-abandoned-timeout: 50
-      log-abandoned: true
-
-      # Interceptors
-      jdbc-interceptors: org.apache.tomcat.jdbc.pool.interceptor.SlowQueryReport(threshold=10000)
 
 
+# Server Properties
 server:
-  port: ${SERVER_PORT:9871}
+  port: 9871
   servlet:
     context-path: /accounts-ms
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-      base-path: /actuator
-  endpoint:
-    health:
-      show-details: always
 
-
+# Security Config
 security:
   token-services:
     client-id: default_oauth2_client_id
     client-secret: QWERTY74gray75raccoon634
     check-token-url: http://localhost:8081/auth-ms/oauth/check_token
-  jwt:
-    local-resource-id: accounts-ms-resource-id
 
 
-
-## Eureka client properties ##
+# Eureka client properties
 eureka:
-  instance:
-    metadataMap:
-      instanceId: ${spring.application.name}:${spring.application.instance_id:${random.int}}
-      management:
-        context-path: ${server.servlet.context-path}/actuator
-        port: ${server.port}
-    #nonSecurePort: 8088
-    statusPageUrlPath: ${server.servlet.context-path}/actuator/info
-    healthCheckUrlPath: ${server.servlet.context-path}/actuator/health
-    leaseRenewalIntervalInSeconds: 5
-    lease-expiration-duration-in-seconds: 5
   client:
     enabled: true
     serviceUrl:
-      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
-    registerWithEureka: true
-    healthcheck:
-      enabled: true
-    #Enable fetch Eureka registry in order to use Ribbon LB
-    fetchRegistry: true
-    registryFetchIntervalSeconds: 5
-
-
-## Feign Clients
-feign:
-  client:
-    config:
-      default:
-        connectTimeout: 5000
-        readTimeout: 5000
-        loggerLevel: full
-        requestInterceptors:
-          - com.grayraccoon.sample.accountsms.config.interceptors.Oauth2TokenInterceptor
-
-
-##Hystrix##
-hystrix:
-  shareSecurityContext: true
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 3000
+      defaultZone: http://localhost:8761/eureka
