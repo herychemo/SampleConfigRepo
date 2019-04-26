@@ -1,0 +1,67 @@
+
+# Server Properties
+server:
+  port: 8080
+
+
+spring:
+  # Logging
+  zipkin:
+    enabled: true
+    base-url: http://ZipkinServer:9411/
+  logging:
+    logstash:
+      url: logstashserver
+      tcp-port: 5000
+      tcp-input: ${logging.logstash.url}:${logging.logstash.tcp-port}
+
+
+  # RabbitMQ
+  rabbitmq:
+    host: RabbitMQ-Server
+    port: 5672
+    username: guest
+    password: guest
+
+
+# OAuth2 Client
+spring.security.oauth2.client:
+  registration:
+    custom-client:
+      provider: custom-provider
+      client-id: default_oauth2_client_id
+      client-secret: QWERTY74gray75raccoon634
+      client-authentication-method: basic
+      authorization-grant-type: authorization_code
+      scope: read
+      redirect-uri-template: "{baseUrl}/login/oauth2/code/{registrationId}"
+      client-name: Login Client
+  provider:
+    custom-provider:
+      authorization-uri: http://ZuulApiProxy:8081/auth-ms/oauth/authorize
+      token-uri: http://ZuulApiProxy:8081/auth-ms/oauth/token
+      user-info-uri: http://ZuulApiProxy:8081/auth-ms/ws/authenticated/user
+      user-name-attribute: username
+
+
+# Cloud Gateway Routes
+spring.cloud.gateway:
+  enabled: true
+  routes:
+    - predicates:
+        - Path=/eureka
+      filters:
+        - StripPrefix=1
+      uri: http://EurekaServer:8761/
+    - predicates:
+        - Path=/eureka/**
+      filters:
+        - StripPrefix=0
+      uri: http://EurekaServer:8761/
+
+
+# Eureka client properties
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://EurekaServer:8761/eureka

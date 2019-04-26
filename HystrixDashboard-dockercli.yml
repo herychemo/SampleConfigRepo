@@ -1,0 +1,20 @@
+
+
+# Server Properties
+server:
+  port: 9002
+
+
+# Security Config
+security:
+  token-services:
+    client-id: default_oauth2_client_id
+    client-secret: QWERTY74gray75raccoon634
+    check-token-url: http://ZuulApiProxy:8081/auth-ms/oauth/check_token
+
+
+# Eureka client properties
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://EurekaServer:8761/eureka
