@@ -160,7 +160,7 @@ eureka:
     registerWithEureka: true
     healthcheck:
       enabled: true
-    fetchRegistry: false
+    fetchRegistry: true
     registryFetchIntervalSeconds: 5
 
 
