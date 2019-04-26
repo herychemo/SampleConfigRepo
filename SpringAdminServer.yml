@@ -2,22 +2,40 @@
 
 # Info
 info:
-  component: Turbine Server
+  component: Spring Admin Server
 
 
 # Server Properties
 server:
-  port: ${SERVER_PORT:9003}
-  servlet:
-    context-path: /
+  port: ${SERVER_PORT:8760}
 
 
 # App name
 spring:
   application:
-    name: turbine-server
+    name: spring-admin-server
   config:
-    name: turbine-server
+    name: SpringAdminServer
+
+
+  # Spring boot admin config
+  #Don't ignore headers, oauth2 secured endpoints require Authorization and Cookies to work
+  boot:
+    admin:
+      ui:
+        public-url: ${SPRING_BOOT_ADMIN_PUBLIC_URL:http://localhost:8080/admin/}
+      instance-proxy:
+        ignored-headers:
+
+
+# Security Config
+security:
+  token-services:
+    client-id: ${OAUTH2_TOKEN_CLIENT_ID:default_oauth2_client_id}
+    client-secret: ${OAUTH2_TOKEN_CLIENT_SECRET:QWERTY74gray75raccoon634}
+    check-token-url: ${OAUTH2_TOKEN_CHECK_TOKEN_URL:http://localhost:8081/auth-ms/oauth/check_token}
+  jwt:
+    local-resource-id: spring-admin-resource-id
 
 
 # Actuator Configuration
@@ -25,22 +43,8 @@ management:
   endpoints:
     web:
       exposure:
-        include: info,health
+        include: '*'
       base-path: /actuator
-  endpoint:
-    health:
-      show-details: always
-
-
-# Turbine Clusters
-turbine:
-  aggregator:
-    clusterConfig: ACCOUNTS-MS,AUTH-MS
-  app-config: accounts-ms,auth-ms
-  instanceUrlSuffix:
-    ACCOUNTS-MS: /accounts-ms/actuator/hystrix.stream
-    AUTH-MS: /auth-ms/actuator/hystrix.stream
-  combine-host-port: true
 
 
 # Eureka client properties

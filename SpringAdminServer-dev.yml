@@ -1,55 +1,28 @@
 
-info:
-  component: Spring Admin Server
 
+# Server Properties
 server:
-  port: ${SERVER_PORT:8760}
+  port: 8760
+
 
 spring:
-  application:
-    name: spring-admin-server
-  config:
-    name: SpringAdminServer
-
-
-  #Don't ignore headers, oauth2 secured endpoints require Authorization and Cookies to work
+  # Spring boot admin config
   boot:
     admin:
       ui:
         public-url: http://localhost:8080/admin/
-      instance-proxy:
-        ignored-headers:
 
 
+# Security Config
 security:
   token-services:
     client-id: default_oauth2_client_id
     client-secret: QWERTY74gray75raccoon634
     check-token-url: http://localhost:8081/auth-ms/oauth/check_token
-  jwt:
-    local-resource-id: spring-admin-resource-id
 
 
-
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-      base-path: /actuator
-
-
+# Eureka client properties
 eureka:
   client:
-    enabled: true
     serviceUrl:
-      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
-    instance:
-      metadataMap:
-        instanceId: ${spring.application.name}:${server.port}
-    registerWithEureka: true
-    healthcheck:
-      enabled: true
-    fetchRegistry: true
-    registryFetchIntervalSeconds: 5
+      defaultZone: http://localhost:8761/eureka

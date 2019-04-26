@@ -2,22 +2,32 @@
 
 # Info
 info:
-  component: Turbine Server
+  component: Hystrix Dashboard
 
 
 # Server Properties
 server:
-  port: ${SERVER_PORT:9003}
+  port: ${SERVER_PORT:9002}
   servlet:
-    context-path: /
+    context-path: /hy
 
 
 # App name
 spring:
   application:
-    name: turbine-server
+    name: hystrix-dashboard
   config:
-    name: turbine-server
+    name: HystrixDashboard
+
+
+# Security Config
+security:
+  token-services:
+    client-id: ${OAUTH2_TOKEN_CLIENT_ID:default_oauth2_client_id}
+    client-secret: ${OAUTH2_TOKEN_CLIENT_SECRET:QWERTY74gray75raccoon634}
+    check-token-url: ${OAUTH2_TOKEN_CHECK_TOKEN_URL:http://localhost:8081/auth-ms/oauth/check_token}
+  jwt:
+    local-resource-id: hystrix-dashboard-resource-id
 
 
 # Actuator Configuration
@@ -25,22 +35,11 @@ management:
   endpoints:
     web:
       exposure:
-        include: info,health
+        include: '*'
       base-path: /actuator
   endpoint:
     health:
       show-details: always
-
-
-# Turbine Clusters
-turbine:
-  aggregator:
-    clusterConfig: ACCOUNTS-MS,AUTH-MS
-  app-config: accounts-ms,auth-ms
-  instanceUrlSuffix:
-    ACCOUNTS-MS: /accounts-ms/actuator/hystrix.stream
-    AUTH-MS: /auth-ms/actuator/hystrix.stream
-  combine-host-port: true
 
 
 # Eureka client properties
@@ -66,5 +65,5 @@ eureka:
     registerWithEureka: true
     healthcheck:
       enabled: true
-    fetchRegistry: true
+    fetchRegistry: false
     registryFetchIntervalSeconds: 5

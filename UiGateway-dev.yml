@@ -1,42 +1,30 @@
 
-info:
-  component: UI Gateway
-
+# Server Properties
 server:
-  port: ${SERVER_PORT:8080}
-  servlet:
-    context-path: /
+  port: 8080
+
 
 spring:
-  application:
-    name: ui-gateway
-  config:
-    name: UiGateway
-
   # Logging
-  sleuth:
-    sampler:
-      probability: 0.2  # 20.0% Sampling
   zipkin:
-    sender:
-      type: web
-    enabled: ${ZIPKIN_ENABLED:true}
-    base-url: ${ZIPKIN_SERVER:http://localhost:9411/}
-
+    enabled: true
+    base-url: http://localhost:9411/
   logging:
     logstash:
-      url: ${LOGSTASH_URL:localhost}
-      tcp-port: ${LOGSTASH_TCP_PORT:5000}
+      url: localhost
+      tcp-port: 5000
       tcp-input: ${logging.logstash.url}:${logging.logstash.tcp-port}
 
 
+  # RabbitMQ
   rabbitmq:
-    host: ${RABBIT_MQ_URL:localhost}
-    port: ${RABBIT_MQ_PORT:5672}
-    username: ${RABBIT_MQ_USERNAME:guest}
-    password: ${RABBIT_MQ_PASSWORD:guest}
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 
+# OAuth2 Client
 spring.security.oauth2.client:
   registration:
     custom-client:
@@ -56,8 +44,7 @@ spring.security.oauth2.client:
       user-name-attribute: username
 
 
-# https://cloud.spring.io/spring-cloud-gateway/single/spring-cloud-gateway.html
-# https://aboullaite.me/spring-cloud-gateway/
+# Cloud Gateway Routes
 spring.cloud.gateway:
   enabled: true
   routes:
@@ -70,80 +57,11 @@ spring.cloud.gateway:
         - Path=/eureka/**
       filters:
         - StripPrefix=0
-        #- RewritePath=/eureka/(?<segment>.*), /bar/$\{segment}
       uri: http://localhost:8761/
 
 
-    - predicates:
-        - Path=/admin/**
-      filters:
-        - StripPrefix=1
-        - TokenRelay=
-      uri: lb://Spring-Admin-Server/
-
-    - predicates:
-        - Path=/hy/**
-      filters:
-        - StripPrefix=0
-        - TokenRelay=
-      uri: lb://Hystrix-Dashboard/
-
-    - predicates:
-        - Path=/tb/**
-      filters:
-        - StripPrefix=1
-        - TokenRelay=
-      uri: lb://turbine-server/
-
-    - predicates:
-        - Path=/turbine.stream**
-        - RemoteAddr=192.168.0.0/24,127.0.0.1
-      filters:
-        - StripPrefix=0
-        - TokenRelay=
-        #- RewritePath=/(?<turbine>.*), /tb/$\{turbine}
-      uri: lb://turbine-server/
-
-
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: info,health
-      base-path: /actuator
-  endpoint:
-    health:
-      show-details: always
-
-
+# Eureka client properties
 eureka:
-  instance:
-    metadataMap:
-      instanceId: ${spring.application.name}:${spring.application.instance_id:${random.int}}
-      management:
-        context-path: ${server.servlet.context-path}/actuator
-        port: ${server.port}
-    #nonSecurePort: 8088
-    statusPageUrlPath: ${server.servlet.context-path}/actuator/info
-    healthCheckUrlPath: ${server.servlet.context-path}/actuator/health
-    leaseRenewalIntervalInSeconds: 5
-    lease-expiration-duration-in-seconds: 5
   client:
-    enabled: true
     serviceUrl:
-      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
-    instance:
-      metadataMap:
-        instanceId: ${spring.application.name}:${server.port}
-    registerWithEureka: true
-    healthcheck:
-      enabled: true
-    fetchRegistry: true
-    registryFetchIntervalSeconds: 5
-
-
-error:
-  whitelabel:
-    enabled: false
-
+      defaultZone: http://localhost:8761/eureka
