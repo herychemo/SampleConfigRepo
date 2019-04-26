@@ -8,6 +8,8 @@ info:
 # Server Properties
 server:
   port: ${SERVER_PORT:8760}
+  servlet:
+    context-path: /
 
 
 # App name
