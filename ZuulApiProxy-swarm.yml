@@ -1,0 +1,32 @@
+
+
+# Server Properties
+server:
+  port: 8081
+
+
+spring:
+  # Logging
+  zipkin:
+    enabled: true
+    base-url: http://tasks.ZipkinServer:9411/
+  logging:
+    logstash:
+      url: tasks.logstashserver
+      tcp-port: 5000
+      tcp-input: ${logging.logstash.url}:${logging.logstash.tcp-port}
+
+
+  # RabbitMQ
+  rabbitmq:
+    host: tasks.RabbitMQ-Server
+    port: 5672
+    username: guest
+    password: guest
+
+
+# Eureka client properties
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://tasks.EurekaServer:8761/eureka
