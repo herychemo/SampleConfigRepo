@@ -34,11 +34,11 @@ spring.security.oauth2.client:
       client-authentication-method: basic
       authorization-grant-type: authorization_code
       scope: read
-      redirect-uri-template: "{baseUrl}/login/oauth2/code/{registrationId}"
+      redirect-uri: "http://swarm-master0:8080/login/oauth2/code/custom-client"
       client-name: Login Client
   provider:
     custom-provider:
-      authorization-uri: http://tasks.ZuulApiProxy:8081/auth-ms/oauth/authorize
+      authorization-uri: http://swarm-master0:8081/auth-ms/oauth/authorize
       token-uri: http://tasks.ZuulApiProxy:8081/auth-ms/oauth/token
       user-info-uri: http://tasks.ZuulApiProxy:8081/auth-ms/ws/authenticated/user
       user-name-attribute: username

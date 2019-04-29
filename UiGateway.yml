@@ -63,7 +63,7 @@ spring.security.oauth2.client:
       client-authentication-method: basic
       authorization-grant-type: authorization_code
       scope: ${OAUTH2_CLIENT_SCOPE:read}
-      redirect-uri-template: "{baseUrl}/login/oauth2/code/{registrationId}"
+      redirect-uri: "{baseUrl}/login/oauth2/code/custom-client"
       client-name: Login Client
   provider:
     custom-provider:
