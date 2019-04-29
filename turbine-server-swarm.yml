@@ -1,0 +1,12 @@
+
+
+# Server Properties
+server:
+  port: 9003
+
+
+# Eureka client properties
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://tasks.EurekaServer:8761/eureka
