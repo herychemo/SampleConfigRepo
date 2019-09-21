@@ -79,42 +79,56 @@ spring:
     locations: classpath:db/migration,classpath:db/data
 
 
-  # Configure Database DataSources
-  datasource:
+  # Web-Utils Configuration
+  web-utils:
+    tasks:
+      maxPoolSize: 100
+      corePoolSize: 30
+      queueCapacity: 200
+    data:
+      enabled: true
+      # Jpa Entities Package
+      entities-package: com.grayraccoon.sample.authms.data.postgres.domain
+      persistence-unit: authMs
 
-    # Postgres DataSource
-    postgres:
-      # Connection Properties
-      driver-class-name: org.postgresql.Driver
-      jdbc-url: jdbc:postgresql://${POSTGRES_DATABASE_HOST:localhost}:${POSTGRES_DATABASE_PORT:5432}/${POSTGRES_DATABASE_DBNAME:cloud_db}?currentSchema=${POSTGRES_DATABASE_SCHEMA:auth}
-      username: ${POSTGRES_DATABASE_USER:dbo_admin}
-      password: ${POSTGRES_DATABASE_PASS:root}
+      heroku:
+        url-env-name: HEROKU_THE_DB_URL
+        db-schema: ${POSTGRES_DATABASE_SCHEMA:auth}
+        db-type: postgresql
 
-      # Pool Properties
-      initial-size: 1
-      max-active: 3
-      min-idle: 1
-      max-idle: 2
+      # Postgres DataSource
+      datasource:
+        # Connection Properties
+        driver-class-name: org.postgresql.Driver
+        jdbc-url: jdbc:postgresql://${POSTGRES_DATABASE_HOST:localhost}:${POSTGRES_DATABASE_PORT:5432}/${POSTGRES_DATABASE_DBNAME:cloud_db}?currentSchema=${POSTGRES_DATABASE_SCHEMA:auth}
+        username: ${POSTGRES_DATABASE_USER:dbo_admin}
+        password: ${POSTGRES_DATABASE_PASS:root}
 
-      # Connection test properties
-      validation-query: SELECT 1
-      test-on-borrow: true
-      test-while-idle: true
+        # Pool Properties
+        maximumPoolSize: 3
+        minimumIdle: 1
 
-      #Connection test timing and intervals properties
-      time-between-eviction-runs-millis: 30000
-      min-evictable-idle-time-millis: 30000
-      validation-interval: 30000
-      max-wait: 10000
+        #Connection test timing and intervals properties
+        connectionTimeout: 30000
+        idleTimeout: 600000
+        maxLifetime: 1200000
 
-      # Abandoned or dead connections handling properties
-      test-on-return: true
-      remove-abandoned: true
-      remove-abandoned-timeout: 50
-      log-abandoned: true
+    #Cors Config
+    web:
+      allow-all-cors: false
 
-      # Interceptors
-      jdbc-interceptors: org.apache.tomcat.jdbc.pool.interceptor.SlowQueryReport(threshold=10000)
+    # Security Config
+    security:
+      oauth2-server:
+        enabled: true
+        signing-key: xja6jeEyKKX5HpJ #https://www.random.org/strings/ 15 length
+        security-realm: Spring Cloud Sample Stack
+      oauth2-resource:
+        enabled: true
+        local-resource-id: auth-ms-resource-id
+        secured-matchers: >
+          /**/authenticated/**,
+          /**/secured/**
 
 
 # Server Properties
@@ -135,13 +149,6 @@ management:
     health:
       show-details: always
 
-
-# Security Config
-security:
-  signing-key: xja6jeEyKKX5HpJ #https://www.random.org/strings/
-  security-realm: Spring Cloud Sample Stack
-  jwt:
-    local-resource-id: auth-ms-resource-id
 
 
 # Eureka client properties

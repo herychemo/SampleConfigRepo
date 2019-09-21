@@ -25,17 +25,16 @@ spring:
     password: guest
 
 
-  # Configure Database DataSources
-  datasource:
-
-    # Postgres DataSource
-    postgres:
-      # Connection Properties
-      driver-class-name: org.postgresql.Driver
-      jdbc-url: jdbc:postgresql://localhost:5432/cloud_db?currentSchema=auth
-      username: dbo_admin
-      password: rootroot
-
+  # Web-Utils Configuration
+  web-utils:
+    data:
+      # Postgres DataSource
+      datasource:
+        # Connection Properties
+        driver-class-name: org.postgresql.Driver
+        jdbc-url: jdbc:postgresql://localhost:5432/cloud_db?currentSchema=auth
+        username: dbo_admin
+        password: rootroot
 
 # Server Properties
 server:
